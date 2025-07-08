@@ -1,14 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import admin from 'firebase-admin';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Baca file JSON secara manual
-const raw = fs.readFileSync(path.join(__dirname, '../firebase-credentials.json'), 'utf8');
-const serviceAccount = JSON.parse(raw);
+const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
 
 if (!admin.apps.length) {
   admin.initializeApp({
