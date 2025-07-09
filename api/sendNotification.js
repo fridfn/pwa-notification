@@ -16,8 +16,7 @@ export default async function sendNotification(req, res) {
   const allowedOrigins = [
   'http://localhost:3000',
   'https://localhost:3000',
-  'https://res.cloudinary.com',
-  'https://raw.githubusercontent.com',
+  'https://cdn-icons-png.flaticon.com',
   'https://portofolio-fridfn.vercel.app',
   'https://pwa-notification-phi.vercel.app'
   ]; 
@@ -41,7 +40,7 @@ export default async function sendNotification(req, res) {
   }
 
   try {
-    const { title, body } = req.body;
+    const { title, body, icon, badge } = req.body
     const snapshot = await db.ref('subscriptions').once('value');
     const subs = snapshot.val();
 
@@ -52,8 +51,8 @@ export default async function sendNotification(req, res) {
     const payload = JSON.stringify({
       title: title || 'Notifikasi Baru!',
       body: body || 'Ini pesan default dari server mu 😚',
-      icon: "https://cdn-icons-png.flaticon.com/512/545/545520.png",
-      badge: "https://cdn-icons-png.flaticon.com/512/545/545705.png"
+      icon: icon || "https://pwa-notification-phi.vercel.app/mailbox.png",
+      badge: badge || "https://cdn-icons-png.flaticon.com/64/545/545782.png"
     });
 
     const results = await Promise.allSettled(
