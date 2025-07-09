@@ -7,24 +7,50 @@ const vapidKeys = {
 };
 
 webpush.setVapidDetails(
-  'mailto:kamu@email.com',
+  'mailto:faridfathonin@email.com',
   vapidKeys.publicKey,
   vapidKeys.privateKey
 );
 
 export default async function sendNotification(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
   try {
+    const { title, body, icon } = req.body;
+
     const snapshot = await db.ref('subscriptions').once('value');
     const subs = snapshot.val();
 
-    const tasks = Object.values(subs || {}).map(sub =>
-      webpush.sendNotification(sub, 'Notif spesial dari project kamu! 😚')
+    if (!subs) {
+      return res.status(404).json({ error: 'Tidak ada subscription ditemukan.' });
+    }
+
+    const payload = JSON.stringify({
+      title: title || 'Notifikasi Baru!',
+      body: body || 'Ini pesan default dari server mu 😚',
+      icon: icon || 'https://cdn-icons-png.flaticon.com/512/545/545705.png'
+    });
+
+    const results = await Promise.allSettled(
+      Object.values(subs).map(sub =>
+        webpush.sendNotification(sub, payload)
+      )
     );
 
-    await Promise.all(tasks);
-    res.status(200).json({ message: 'Notifikasi terkirim ke semua subscriber!' });
+    const success = results.filter(r => r.status === 'fulfilled').length;
+    const failed = results.filter(r => r.status === 'rejected').length;
+
+    console.log(`✅ ${success} berhasil, ❌ ${failed} gagal`);
+
+    res.status(200).json({
+      message: 'Push Notification selesai dikirim.',
+      success,
+      failed
+    });
   } catch (err) {
-    console.error('Error kirim notif:', err);
-    res.status(500).json({ error: 'Gagal kirim notifikasi' });
+    console.error('❌ Gagal total kirim notif:', err);
+    res.status(500).json({ error: 'Server error saat kirim notifikasi' });
   }
 }
