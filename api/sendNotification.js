@@ -51,8 +51,8 @@ export default async function sendNotification(req, res) {
     const payload = JSON.stringify({
       title: title || 'Notifikasi Baru!',
       body: body || 'Ini pesan default dari server mu 😚',
-      icon: 'https://pwa-notification-phi.vercel.app/web-app-manifest-192x192.png',
-      badge: 'https://pwa-notification-phi.vercel.app/favicon-96x96.png'
+      icon: icon || 'https://pwa-notification-phi.vercel.app/web-app-manifest-192x192.png',
+      badge: badge || 'https://pwa-notification-phi.vercel.app/favicon-96x96.png'
     });
 
     const results = await Promise.allSettled(
