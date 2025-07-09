@@ -1,6 +1,16 @@
 import { db } from '../firebase/firebase-admin.js';
 
 export default async function saveSubscription(req, res) {
+  // Tambah CORS header di awal
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Biar Vercel gak error waktu preflight
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  
   if (req.method !== 'POST') {
     return res.status(405).send('Method Not Allowed');
   }
