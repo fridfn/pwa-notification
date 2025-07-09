@@ -39,7 +39,7 @@ export default async function sendNotification(req, res) {
   }
 
   try {
-    const { title, body, icon } = req.body;
+    const { title, body, icon, badge } = req.body;
 
     const snapshot = await db.ref('subscriptions').once('value');
     const subs = snapshot.val();
