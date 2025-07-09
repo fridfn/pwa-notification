@@ -47,11 +47,12 @@ export default async function sendNotification(req, res) {
     if (!subs) {
       return res.status(404).json({ error: 'Tidak ada subscription ditemukan.' });
     }
-
+    
     const payload = JSON.stringify({
       title: title || 'Notifikasi Baru!',
       body: body || 'Ini pesan default dari server mu 😚',
-      icon: icon || 'https://cdn-icons-png.flaticon.com/512/545/545705.png'
+      icon: 'https://pwa-notification-phi.vercel.app/web-app-manifest-192x192.png',
+      badge: 'https://pwa-notification-phi.vercel.app/favicon-96x96.png'
     });
 
     const results = await Promise.allSettled(
