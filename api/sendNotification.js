@@ -16,7 +16,8 @@ export default async function sendNotification(req, res) {
   const allowedOrigins = [
   'http://localhost:5173',
   'https://localhost:5173',
-  'https://portofolio-fridfn.vercel.app'
+  'https://portofolio-fridfn.vercel.app',
+  'https://pwa-notification-phi.vercel.app'
   ]; 
   
   const origin = req.headers.origin;
