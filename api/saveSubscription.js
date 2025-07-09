@@ -2,7 +2,7 @@ import { db } from '../firebase/firebase-admin.js';
 
 export default async function saveSubscription(req, res) {
   // Tambah CORS header di awal
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'https://portofolio-fridfn.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
