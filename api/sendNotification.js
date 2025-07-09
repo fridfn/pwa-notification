@@ -14,8 +14,9 @@ webpush.setVapidDetails(
 
 export default async function sendNotification(req, res) {
   const allowedOrigins = [
-  'http://localhost:5173',
-  'https://localhost:5173',
+  'http://localhost:3000',
+  'https://localhost:3000',
+  'https://res.cloudinary.com',
   'https://raw.githubusercontent.com',
   'https://portofolio-fridfn.vercel.app',
   'https://pwa-notification-phi.vercel.app'
@@ -40,8 +41,7 @@ export default async function sendNotification(req, res) {
   }
 
   try {
-    const { title, body, icon, badge } = req.body;
-
+    const { title, body } = req.body;
     const snapshot = await db.ref('subscriptions').once('value');
     const subs = snapshot.val();
 
@@ -52,8 +52,8 @@ export default async function sendNotification(req, res) {
     const payload = JSON.stringify({
       title: title || 'Notifikasi Baru!',
       body: body || 'Ini pesan default dari server mu 😚',
-      icon: icon || 'https://raw.githubusercontent.com/fridfn/pwa-notification/refs/heads/main/public/message.png',
-      badge: badge || 'https://raw.githubusercontent.com/fridfn/pwa-notification/refs/heads/main/public/message.png'
+      icon: "https://cdn-icons-png.flaticon.com/512/545/545520.png",
+      badge: "https://cdn-icons-png.flaticon.com/512/545/545705.png"
     });
 
     const results = await Promise.allSettled(
@@ -64,13 +64,12 @@ export default async function sendNotification(req, res) {
 
     const success = results.filter(r => r.status === 'fulfilled').length;
     const failed = results.filter(r => r.status === 'rejected').length;
-
-    console.log(`✅ ${success} berhasil, ❌ ${failed} gagal`);
-
+    
     res.status(200).json({
       message: 'Push Notification selesai dikirim.',
       success,
-      failed
+      failed,
+      datas: req.body
     });
   } catch (err) {
     console.error('❌ Gagal total kirim notif:', err);

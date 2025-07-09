@@ -8,9 +8,10 @@ import sendNotification from './api/sendNotification.js';
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/api/saveSubscription', saveSubscription);
-app.get('/api/sendNotification', sendNotification);
+app.post('/api/sendNotification', sendNotification);
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server jalan di http://localhost:${PORT}`));

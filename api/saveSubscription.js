@@ -3,8 +3,8 @@ import { db } from '../firebase/firebase-admin.js';
 export default async function saveSubscription(req, res) {
   // Tambah CORS header di awal
   const allowedOrigins = [
-  'http://localhost:5173',
-  'https://localhost:5173',
+  'http://localhost:3000',
+  'https://localhost:3000',
   'https://portofolio-fridfn.vercel.app'
   ]; 
   
