@@ -1,15 +1,13 @@
 import { db } from '../firebase/firebase-admin.js';
 
-export default const saveBroadcast = async (req, res) => {
-  const { title, message } = data;
-  
+export default async function saveBroadcast(req, res) {
   const allowedOrigins = [
     'http://localhost:5173',
     'https://localhost:5173',
     'https://cdn-icons-png.flaticon.com',
     'https://portofolio-fridfn.vercel.app',
     'https://pwa-notification-phi.vercel.app'
-    ]; 
+   ]; 
   
   const origin = req.headers.origin;
   
