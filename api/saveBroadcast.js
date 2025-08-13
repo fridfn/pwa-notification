@@ -1,4 +1,6 @@
-export const saveBroadcast = async (data) => {
+import { db } from '../firebase/firebase-admin.js';
+
+export default const saveBroadcast = async (req, res) => {
   const { title, message } = data;
   
   const allowedOrigins = [
