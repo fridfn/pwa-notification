@@ -1,29 +1,38 @@
 export const saveBroadcast = async (data) => {
   const { title, message } = data;
   
+  const allowedOrigins = [
+    'http://localhost:5173',
+    'https://localhost:5173',
+    'https://cdn-icons-png.flaticon.com',
+    'https://portofolio-fridfn.vercel.app',
+    'https://pwa-notification-phi.vercel.app'
+    ]; 
+  
+  const origin = req.headers.origin;
+  
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Biar Vercel gak error waktu preflight
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  
+  if (req.method !== 'POST') {
+    return res.status(405).send('Method Not Allowed');
+  }
+
+  const broadcast = req.body;
   try {
-   const respond = await fetch("https://pwa-notification-phi.vercel.app/api/sendNotification", {
-    method: "POST",
-    headers: {
-     "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-       title,
-       body: message,
-       icon: "https://pwa-notification-phi.vercel.app/mailbox.png",
-       badge: "https://cdn-icons-png.flaticon.com/64/545/545782.png"
-      })
-   })
-   
-   if (!respond.ok) {
-    const result = await respond.text()
-    console.error("❌ Server Error:", result);
-    return;
-   }
-   
-   const result = await respond.json()
-   console.log("✅ Berhasil kirim:", data);
+    const ref = db.ref('broadcast');
+    await ref.push(broadcast);
+    res.status(200).json({ message: 'Subscription berhasil disimpan!' });
   } catch (err) {
-    console.error("❌ Gagal Kirim:", err);
+    console.error('Error simpan subscription:', err);
+    res.status(500).json({ error: 'Gagal menyimpan' });
   }
 }
