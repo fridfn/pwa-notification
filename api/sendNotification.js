@@ -43,7 +43,7 @@ export default async function sendNotification(req, res) {
     const { title, body, icon, badge } = req.body
     const snapshot = await db.ref('subscriptions').once('value');
     const subs = snapshot.val();
-
+    
     if (!subs) {
       return res.status(404).json({ error: 'Tidak ada subscription ditemukan.' });
     }
