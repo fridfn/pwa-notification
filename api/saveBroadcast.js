@@ -31,7 +31,7 @@ export default async function saveBroadcast(req, res) {
   const broadcast = req.body;
   try {
     const ref = db.ref(`broadcast/${key}`);
-    await ref.push(broadcast);
+    await ref.set(broadcast);
     res.status(200).json({ message: 'broadcast berhasil disimpan!' });
   } catch (err) {
     console.error('Error simpan broadcast:', err);
