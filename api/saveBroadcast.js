@@ -1,5 +1,5 @@
-import { db } from '../firebase/firebase-admin';
-import { generateKey } from "../utils/generateKey";
+import { db } from '../firebase/firebase-admin.js';
+import { generateKey } from "../utils/generateKey.js";
 
 export default async function saveBroadcast(req, res) {
   const allowedOrigins = [
@@ -27,9 +27,10 @@ export default async function saveBroadcast(req, res) {
     return res.status(405).send('Method Not Allowed');
   }
   
+  const key = generateKey(true)
   const broadcast = req.body;
   try {
-    const ref = db.ref(`broadcast/${generateKey(true)}`);
+    const ref = db.ref(`broadcast/${key}`);
     await ref.push(broadcast);
     res.status(200).json({ message: 'broadcast berhasil disimpan!' });
   } catch (err) {
