@@ -1,4 +1,5 @@
-import { db } from '../firebase/firebase-admin.js';
+import { db } from '../firebase/firebase-admin';
+import { generateKey } from "../utils/generateKey";
 
 export default async function saveBroadcast(req, res) {
   const allowedOrigins = [
@@ -25,14 +26,14 @@ export default async function saveBroadcast(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).send('Method Not Allowed');
   }
-
+  
   const broadcast = req.body;
   try {
-    const ref = db.ref('broadcast');
+    const ref = db.ref(`broadcast/${generateKey(true)}`);
     await ref.push(broadcast);
-    res.status(200).json({ message: 'Subscription berhasil disimpan!' });
+    res.status(200).json({ message: 'broadcast berhasil disimpan!' });
   } catch (err) {
-    console.error('Error simpan subscription:', err);
+    console.error('Error simpan broadcast:', err);
     res.status(500).json({ error: 'Gagal menyimpan' });
   }
 }
