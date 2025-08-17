@@ -1,7 +1,7 @@
 import { db } from "../firebase/firebase-admin.js"
 import { generateKey } from "../utils/generateKey.js"
 
-export default saveFeedback = async (req, res) => {
+export default async function saveFeedback (req, res) {
   const allowedOrigins = [
     'http://localhost:5173',
     'https://localhost:5173',
