@@ -27,8 +27,8 @@ export default async function saveBroadcast(req, res) {
     return res.status(405).send('Method Not Allowed');
   }
   
-  const key = generateKey(true)
   const broadcast = req.body;
+  const key = generateKey(true)
   try {
     const ref = db.ref(`broadcast/${key}`);
     await ref.set(broadcast);
