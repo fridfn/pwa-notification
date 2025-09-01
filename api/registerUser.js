@@ -14,6 +14,7 @@ export default async function registerUser (req,res) {
    if (allowredOrigin.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin)
    }
+   
    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS")
    res.setHeader("Access-Control-Allow-Headers", "Content-Type")
    
