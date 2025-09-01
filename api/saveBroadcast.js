@@ -17,8 +17,7 @@ export default async function saveBroadcast(req, res) {
   }
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  // Biar Vercel gak error waktu preflight
+  
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }

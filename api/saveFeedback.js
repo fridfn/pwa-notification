@@ -23,13 +23,14 @@ export default async function saveFeedback (req, res) {
   }
   
   if (req.method !== "POST") {
-    return res.status(200).send("method not allowed :", req.method)
+    return res.status(200).send("method not allowed")
   }
   
   const feedback = req.body;
-  const key = generateKey(true)
+  const uniqueName = feedback.name
+  const uniqueTimeKey = generateKey(true)
   try {
-    const ref = db.ref(`feedback/${key}`)
+    const ref = db.ref(`feedback/${uniqueName}/${uniqueTimeKey}`)
     await ref.set(feedback);
     res.status(200).json({ message: "success save feedback" })
    } catch (err) {
