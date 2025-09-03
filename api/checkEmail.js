@@ -23,7 +23,7 @@ export default async function checkEmail(req, res) {
   }
   
   if (req.method !== "POST") {
-   return res.status(200).send("method not allowed")
+   return res.status(405).send("method not allowed")
   }
   
   const { email } = req.body;
