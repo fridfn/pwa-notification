@@ -6,8 +6,8 @@ import Notification from './api/notification'
 import Checkemail from './api/checkemail.js';
 import Broadcast from './api/broadcast.js';
 import Feedback from './api/feedback.js';
-import Register from './api/register.js';
-import Activity from './api/activity.js';
+import Register from './api/user/register.js';
+import Activity from './api/user/activity.js';
 
 const app = express();
 app.use(cors());
