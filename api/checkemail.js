@@ -1,6 +1,6 @@
 import { db } from "../firebase/firebase-admin.js"
 
-export default async function checkEmail(req, res) {
+export default async function checkemail(req, res) {
   const { email } = req.body;
   try {
    const snapshot = await db.ref("users")

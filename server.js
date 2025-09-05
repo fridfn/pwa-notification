@@ -3,7 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import Subscription from './api/subscription'
 import Notification from './api/notification'
-import checkEmail from './api/checkemail.js';
+import checkemail from './api/checkemail.js';
 import Broadcast from './api/broadcast.js';
 import Feedback from './api/feedback.js';
 import Register from './api/register.js';
@@ -44,7 +44,7 @@ app.use((req, res, next) => {
 
 app.post('/api/feedback', Feedback);
 app.post('/api/broadcast', Broadcast);
-app.post('/api/checkemail', checkEmail);
+app.post('/api/checkemail', checkemail);
 app.post('/api/user/register', Register);
 app.post('/api/user/activity', Activity);
 app.post('/api/subscription', Subscription);
