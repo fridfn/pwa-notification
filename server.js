@@ -35,6 +35,10 @@ app.use((req, res, next) => {
     return res.sendStatus(200);
   }
   
+  if (req.method !== "POST") {
+   return res.status(405).send("Method not allowed")
+  }
+  
   next();
 });
 
