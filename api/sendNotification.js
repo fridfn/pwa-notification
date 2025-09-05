@@ -13,32 +13,6 @@ webpush.setVapidDetails(
 );
 
 export default async function sendNotification(req, res) {
-  const allowedOrigins = [
-  'http://localhost:5173',
-  'https://localhost:5173',
-  'https://cdn-icons-png.flaticon.com',
-  'https://portofolio-fridfn.vercel.app',
-  'https://pwa-notification-phi.vercel.app'
-  ]; 
-  
-  const origin = req.headers.origin;
-  
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  // Handle preflight
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-  
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
   try {
     const { title, body, icon, badge } = req.body
     const snapshot = await db.ref('subscriptions').once('value');
