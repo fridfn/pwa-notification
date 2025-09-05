@@ -1,4 +1,4 @@
-import { db } from '../firebase/firebase-admin.js'
+import { db } from '../../firebase/firebase-admin.js'
 
 export default async function Register(req,res) {
    try {
