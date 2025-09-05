@@ -1,7 +1,7 @@
 import { db } from "../firebase/firebase-admin.js"
 import { generateKey } from "../utils/generateKey.js"
 
-export default async function DailyActivity (req, res) {
+export default async function Activity (req, res) {
   try {
   const { uid, dataActivity } = req.body;
   const uniqueTimeKey = generateKey(false)

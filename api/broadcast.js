@@ -1,7 +1,7 @@
 import { db } from '../firebase/firebase-admin.js';
 import { generateKey } from "../utils/generateKey.js";
 
-export default async function saveBroadcast(req, res) {
+export default async function Broadcast(req, res) {
   try {
   const broadcast = req.body;
   const key = generateKey(true)

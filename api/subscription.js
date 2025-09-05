@@ -1,6 +1,6 @@
 import { db } from '../firebase/firebase-admin.js';
 
-export default async function saveSubscription(req, res) {
+export default async function Subscription(req, res) {
   try {
     const subscription = req.body;
     const ref = db.ref('subscriptions');

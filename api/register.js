@@ -1,6 +1,6 @@
 import { db } from '../firebase/firebase-admin.js'
 
-export default async function registerUser (req,res) {
+export default async function Register(req,res) {
    try {
    const user = req.body
    const { uid, email, createdAt, lastLoginAt } = user;

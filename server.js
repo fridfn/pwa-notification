@@ -1,13 +1,13 @@
 import cors from 'cors';
 import express from 'express';
 import bodyParser from 'body-parser';
-import saveSubscription from './api/saveSubscription.js';
-import sendNotification from './api/sendNotification.js';
-import checkEmail from './api/checkEmail.js';
-import saveBroadcast from './api/saveBroadcast.js';
-import saveFeedback from './api/saveFeedback.js';
-import registerUser from './api/registerUser.js';
-import DailyActivity from './api/DailyActivity.js';
+import Subscription from './api/subscription'
+import Notification from './api/notification'
+import checkEmail from './api/checkemail.js';
+import Broadcast from './api/broadcast.js';
+import Feedback from './api/feedback.js';
+import Register from './api/register.js';
+import Activity from './api/activity.js';
 
 const app = express();
 app.use(cors());
@@ -42,13 +42,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post('/api/subscription', saveSubscription);
-app.post('/api/notification', sendNotification);
-app.post('/api/broadcast', saveBroadcast);
-app.post('/api/feedback', saveFeedback);
+app.post('/api/feedback', Feedback);
+app.post('/api/broadcast', Broadcast);
 app.post('/api/checkemail', checkEmail);
-app.post('/api/user/register', registerUser);
-app.post('/api/user/activity', DailyActivity);
+app.post('/api/user/register', Register);
+app.post('/api/user/activity', Activity);
+app.post('/api/subscription', Subscription);
+app.post('/api/notification', Notification);
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server jalan di http://localhost:${PORT}`));
