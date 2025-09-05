@@ -1,7 +1,7 @@
 import admin from 'firebase-admin';
 import { readFileSync } from 'fs';
 
-llconst serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
+const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG);
 //const serviceAccount = JSON.parse(readFileSync('./firebase-credentials.json', 'utf-8'));
 
 if (!admin.apps.length) {
