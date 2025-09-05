@@ -1,8 +1,6 @@
 import cors from 'cors';
-import path from "path";
 import express from 'express';
 import bodyParser from 'body-parser';
-
 import saveSubscription from './api/saveSubscription.js';
 import sendNotification from './api/sendNotification.js';
 import checkEmail from './api/checkEmail.js';
@@ -40,10 +38,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post('/api/saveSubscription', saveSubscription);
-app.post('/api/sendNotification', sendNotification);
-app.post('/api/saveBroadcast', saveBroadcast);
-app.post('/api/saveFeedback', saveFeedback);
+app.post('/api/subscription', saveSubscription);
+app.post('/api/notification', sendNotification);
+app.post('/api/broadcast', saveBroadcast);
+app.post('/api/feedback', saveFeedback);
 app.post('/api/checkemail', checkEmail);
 app.post('/api/user/register', registerUser);
 app.post('/api/user/activity', DailyActivity);
