@@ -55,12 +55,18 @@ app.post('/api/user/register', registerUser);
 app.post('/api/user/activity', DailyActivity);
 
 app.get("/", (req, res) => {
-  res.render("index", { title: "Endpoint - Farid Fathoni N" });
+  res.render("index", { 
+   title: "Endpoint - Farid Fathoni N",
+   message: "!"
+  });
 });
 
 app.get("/api/checkemail", (req, res) => {
   const endpoint = req.path;
-  res.render("index", { title: `Endpoint - ${endpoint}`, message: endpoint });
+  res.render("index", { 
+   title: `Endpoint - ${endpoint}`,
+   message: endpoint
+  });
 });
 
 const PORT = 3000;
