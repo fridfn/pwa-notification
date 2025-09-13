@@ -1,4 +1,4 @@
-export const handleCors = () => {
+export const handleCors = (req, res) => {
   const allowedOrigins = [
     'http://localhost:5173',
     'https://localhost:5173',
