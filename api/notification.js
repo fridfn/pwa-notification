@@ -1,5 +1,6 @@
 import webpush from 'web-push';
 import { db } from '../firebase/firebase-admin.js';
+import { handleCors } from "../utils/handleCors.js"
 
 const vapidKeys = {
   publicKey: 'BG36Zp6Qg1pM7czK5qVSBOmccF87woXofKRBhI9gPM3C0rMPwlrpvaCLcovgmAGmxJXXKwEpCKWAC9IlDZQXnRg',
@@ -13,6 +14,10 @@ webpush.setVapidDetails(
 );
 
 export default async function Notification(req, res) {
+  if (handleCors(req, res)) return;
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
   try {
     const { title, body, icon, badge } = req.body
     const snapshot = await db.ref('subscriptions').once('value');

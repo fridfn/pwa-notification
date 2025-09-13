@@ -1,6 +1,11 @@
 import { db } from '../../firebase/firebase-admin.js'
+import { handleCors } from "../utils/handleCors.js"
 
 export default async function Register(req,res) {
+  if (handleCors(req, res)) return;
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
    try {
    const user = req.body
    const { uid, email, createdAt, lastLoginAt } = user;

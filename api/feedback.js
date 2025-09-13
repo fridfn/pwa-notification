@@ -1,7 +1,12 @@
 import { db } from "../firebase/firebase-admin.js"
 import { generateKey } from "../utils/generateKey.js"
+import { handleCors } from "../utils/handleCors.js"
 
 export default async function saveFeedback (req, res) {
+  if (handleCors(req, res)) return;
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
   try {
     const feedback = req.body;
     const uniqueName = feedback.name
