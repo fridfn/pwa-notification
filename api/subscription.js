@@ -1,5 +1,5 @@
 import { db } from '../firebase/firebase-admin.js';
-import { handleCors } from "../../utils/handleCors.js"
+import { handleCors } from "../utils/handleCors.js"
 
 export default async function Subscription(req, res) {
   if (handleCors(req, res)) return;
@@ -29,3 +29,4 @@ export default async function Subscription(req, res) {
     res.status(500).json({ error: 'Gagal menyimpan' });
   }
 }
+
