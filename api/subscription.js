@@ -18,11 +18,6 @@ export default async function Subscription(req, res) {
       subscription,
       message: 'Subscription berhasil disimpan!'
     });
-    
-    console.log({
-      subscription,
-      message: 'Subscription berhasil disimpan!'
-    })
   } catch (err) {
     console.error('Error simpan subscription:', err);
     res.status(500).json({ error: 'Gagal menyimpan' });
