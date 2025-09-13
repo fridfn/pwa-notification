@@ -9,7 +9,7 @@ export default async function Subscription(req, res) {
     }
     
     const ref = db.ref('subscriptions');
-    await ref.push({ 
+    await ref.push({
      subscription,
      subscribeAt: new Date().toISOString()
     });
