@@ -1,6 +1,6 @@
 import { db } from "../../firebase/firebase-admin.js"
 import { generateKey } from "../../utils/generateKey.js"
-import { handleCors } from "../utils/handleCors.js"
+import { handleCors } from "../../utils/handleCors.js"
 
 export default async function Activity (req, res) {
   if (handleCors(req, res)) return;

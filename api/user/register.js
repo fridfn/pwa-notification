@@ -1,5 +1,5 @@
 import { db } from '../../firebase/firebase-admin.js'
-import { handleCors } from "../utils/handleCors.js"
+import { handleCors } from "../../utils/handleCors.js"
 
 export default async function Register(req,res) {
   if (handleCors(req, res)) return;
