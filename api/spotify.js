@@ -1,7 +1,7 @@
 import { get } from "@vercel/edge-config";
 import { handleCors } from "../utils/handleCors.js";
 import { mapTrack } from "../lib/mappers/track.js";
-import { getTrackById, searchTracks } from "../lib/deezer.js";
+import { getTrackById, searchTrack } from "../lib/deezer.js";
 
 export default async function Spotify(req, res) {
   const { q, limit, id } = req.query;
@@ -52,7 +52,7 @@ export default async function Spotify(req, res) {
     } else {
       console.log(`🔄 Fetching from Deezer: "${q}"`);
 
-      data = await searchTracks(q);
+      data = await searchTrack(q);
 
       await fetch(`${process.env.EDGE_CONFIG}/items/${rawCacheKey}`, {
         method: "PATCH",
